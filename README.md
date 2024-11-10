@@ -1,6 +1,8 @@
-
-BURI
-
 # 進路相談AI
 
-yuridesu
+- engineer
+  - BURI
+  - yuridesu
+
+- teacher
+  - satake
