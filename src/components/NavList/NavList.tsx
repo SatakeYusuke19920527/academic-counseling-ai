@@ -16,6 +16,12 @@ const NavList = () => {
       label: '進路相談AI',
       link: '/',
       icon: <BsRocketTakeoff className="size-5" />,
+    },
+    {
+      id: 2,
+      label: '質問',
+      link: '/components/question/questionMain2',
+      icon: <BsRocketTakeoff className="size-5" />,
     }
   ];
   return (
