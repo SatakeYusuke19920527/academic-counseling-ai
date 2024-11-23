@@ -25,6 +25,8 @@ import Box from "@mui/material/Box";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
+import Link from "next/link";
+
 
 export default function questionMain2() {
       const [selectedValue, setSelectedValue] = useState("female");
@@ -47,6 +49,7 @@ export default function questionMain2() {
       });
     
       return (
+        <div>
         <Box
           sx={{
             width: "100%",
@@ -85,6 +88,8 @@ export default function questionMain2() {
           </RadioGroup>
           </Stack>
         </Box>
+        <Link href="/result">Go to Result Page</Link>
+        </div>
       );
     };
 
