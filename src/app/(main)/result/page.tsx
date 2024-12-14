@@ -12,10 +12,8 @@ const ResultPage = () => {
     
     try {
       console.log('start',sendtext);
-      const baseURL = process.env.NODE_ENV;
-      console.log(baseURL)
-      const response = await fetch(`/api/azOpenAI?message=${encodeURIComponent(sendtext)}`);
-      console.log(response)
+      const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
+      const response = await fetch(`${baseURL}/api/azOpenAI?message=${encodeURIComponent(sendtext)}`);
       if (response.status !== 200) throw new Error('Failed to fetch tasks');
         const data = await response.json();
         console.log('途中 data : ', data);
