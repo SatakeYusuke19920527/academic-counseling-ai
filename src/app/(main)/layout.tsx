@@ -28,7 +28,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
         <main className="bg-slate-50 flex-1 overflow-auto">{children}</main>
       </Provider>
     </div>
-  );
+  ); 
 };
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (

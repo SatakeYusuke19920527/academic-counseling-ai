@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+
+/* カラー設定 */
+:root {
+	--primary-color: 143, 187, 234;
+	--secondary-color: 240, 171, 165;
+	--back-color: 240, 235, 232;
+	--black-color: 65, 64, 62;
+	--white-color:255, 255, 255;
+	--gray-color: 221, 221, 221;
+	--gray-light-color: 247, 247 ,247;
+}
