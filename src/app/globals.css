@@ -9,9 +9,23 @@
 :root {
 	--primary-color: 143, 187, 234;
 	--secondary-color: 240, 171, 165;
+	--tertiary-color: 240, 171, 165;
+	--quaternary-color: 240, 171, 165;
+	--quinary-color: 240, 171, 165;
 	--back-color: 240, 235, 232;
 	--black-color: 65, 64, 62;
 	--white-color:255, 255, 255;
 	--gray-color: 221, 221, 221;
 	--gray-light-color: 247, 247 ,247;
 }
+
+  /* ラジオボタンの選択肢文字列の大きさ */
+  .el-radio__label {
+	font-size: 1%;
+  }
+  
+  /* ラジオボタンの大きさ */
+  .el-radio__inner {
+	width: 20px;
+	height: 20px;
+  }
