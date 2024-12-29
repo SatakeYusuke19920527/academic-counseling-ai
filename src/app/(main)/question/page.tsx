@@ -116,7 +116,7 @@ return (
   </Box>
 
   <Box sx={{ width: "100%", backgroundColor:"#f5f5f5", "&:hover": { backgroundColor:"#eeeeee"},}}>
-    <Stack direction="row" spacing={1} paddingLeft="10%" paddingTop="4%" paddingBottom="4%" alignItems="center">
+    <Stack direction="row" spacing={1} paddingLeft="10%" paddingRight="10%" paddingTop="4%" paddingBottom="4%" alignItems="center">
      <FormControl><FormLabel id="demo-radio-buttons-group-label" sx={{ color:"#000000",}}>-得意なことは何ですか?-　　　　　　　　　　　</FormLabel>
       <TextField value={tokuinakoto} onChange={tokuinakotoChangeChange} sx={{ borderColor: '#CCCCCC',  '&:hover fieldset': { borderColor: '#DDDDDD',},"& .MuiInputBase-input": { height: 50 }, width:"100%", }} placeholder="文字を入力" multiline rows={3} /></FormControl>
     </Stack></Box>
@@ -335,7 +335,7 @@ return (
 
       <Box sx={{ width: "100%", backgroundColor:"#f5f5f5", "&:hover": { backgroundColor:"#eeeeee"},}}>
       <Stack direction="row" spacing={1} paddingLeft="10%" marginRight="10%" paddingTop="4%" paddingBottom="4%" alignItems="center">
-        <FormControl><FormLabel id="demo-radio-buttons-group-label" sx={{ color:"#000000",}}>-働く目的はなんだと思いますか?-　　　　　　　　　　　</FormLabel>
+        <FormControl><FormLabel id="demo-radio-buttons-group-label" sx={{ color:"#000000",}}>-働く目的はなんだと思いますか?-　　　　　　　　　</FormLabel>
           <TextField value={hatarakumokuteki} onChange={hatarakumokutekiChangeChange} sx={{ borderColor: '#CCCCCC',  '&:hover fieldset': { borderColor: '#DDDDDD',},"& .MuiInputBase-input": { height: 50 }, width:"100%", }} placeholder="文字を入力" multiline rows={3} /></FormControl>
       </Stack></Box>
 
