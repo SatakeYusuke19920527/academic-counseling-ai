@@ -44,10 +44,10 @@ export default function Home() {
       setHensachiChange(hensachiChange); 
       console.log(hensachiChange); 
     };
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      const handleChangeChange = event.target.value;
-      setHandleChangeChange(handleChangeChange); 
-      console.log(handleChangeChange); 
+    const tokuinakotoChangeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      const newTokuinakoto = event.target.value;
+      settTokuinakoto(newTokuinakoto); // 正しい状態を更新
+      console.log(newTokuinakoto);
     };
     const juunenngo = (event: React.ChangeEvent<HTMLInputElement>) => {
       const juunenngoChange = event.target.value;
@@ -80,6 +80,21 @@ export default function Home() {
       setNigatenakamokuChange(nigatenakamokuChange); 
       console.log(nigatenakamokuChange); 
     };
+    const donoyounasigotoChangeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      const newDonoyounasigoto = event.target.value;
+      setDonoyounasigoto(newDonoyounasigoto); // 正しい状態を更新
+      console.log(newDonoyounasigoto);
+    };
+    const sigotodekakawaritaihitoChangeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      const newSigotodekakawaritaihito = event.target.value;
+      setSigotodekakawaritaihito(newSigotodekakawaritaihito); // 正しい状態を更新
+      console.log(newSigotodekakawaritaihito);
+    };
+    const hatarakumokutekiChangeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      const newHatarakumokuteki = event.target.value;
+      setHatarakumokuteki(newHatarakumokuteki); // 正しい状態を更新
+      console.log(newHatarakumokuteki);
+    };
 
 return (
   <Box sx={{ backgroundColor:"#",}}>
@@ -102,8 +117,8 @@ return (
 
   <Box sx={{ width: "100%", backgroundColor:"#f5f5f5", "&:hover": { backgroundColor:"#eeeeee"},}}>
     <Stack direction="row" spacing={1} paddingLeft="10%" paddingTop="4%" paddingBottom="4%" alignItems="center">
-     <FormControl><FormLabel id="demo-radio-buttons-group-label" sx={{ color:"#000000",}}>-得意なことは何ですか?-</FormLabel>
-      <TextField value={tokuinakoto} onChange={handleChange} sx={{ borderColor: '#CCCCCC',  '&:hover fieldset': { borderColor: '#DDDDDD',},"& .MuiInputBase-input": { height: 50 }, width:"150%", }} placeholder="文字を入力" multiline rows={3} /></FormControl>
+     <FormControl><FormLabel id="demo-radio-buttons-group-label" sx={{ color:"#000000",}}>-得意なことは何ですか?-　　　　　　　　　　　</FormLabel>
+      <TextField value={tokuinakoto} onChange={tokuinakotoChangeChange} sx={{ borderColor: '#CCCCCC',  '&:hover fieldset': { borderColor: '#DDDDDD',},"& .MuiInputBase-input": { height: 50 }, width:"100%", }} placeholder="文字を入力" multiline rows={3} /></FormControl>
     </Stack></Box>
 
   <Box sx={{ width: "100%", backgroundColor:"#f5f5f5", "&:hover": { backgroundColor:"#eeeeee"},}}>
@@ -307,21 +322,21 @@ return (
       </RadioGroup></FormControl></Stack></Box>
 
     <Box sx={{ width: "100%", backgroundColor:"#f5f5f5", "&:hover": { backgroundColor:"#eeeeee"},}}>
-      <Stack direction="row" spacing={1} paddingLeft="10%" paddingTop="4%" paddingBottom="4%" alignItems="center">
-        <FormControl><FormLabel id="demo-radio-buttons-group-label" sx={{ color:"#000000",}}>-どのような仕事がしたいですか?-</FormLabel>
-          <TextField value={donoyounasigoto} onChange={handleChange} sx={{ borderColor: '#CCCCCC',  '&:hover fieldset': { borderColor: '#DDDDDD',},"& .MuiInputBase-input": { height: 50 }, width:"150%", }} placeholder="文字を入力" multiline rows={3} /></FormControl>
+      <Stack direction="row" spacing={1} paddingLeft="10%" marginRight="10%" paddingTop="4%" paddingBottom="4%" alignItems="center">
+        <FormControl><FormLabel id="demo-radio-buttons-group-label" sx={{ color:"#000000",}}>-どのような仕事がしたいですか?-　　　　　　　　　</FormLabel>
+          <TextField value={donoyounasigoto} onChange={donoyounasigotoChangeChange} sx={{ borderColor: '#CCCCCC',  '&:hover fieldset': { borderColor: '#DDDDDD',},"& .MuiInputBase-input": { height: 50 }, width:"100%", }} placeholder="文字を入力" multiline rows={3} /></FormControl>
       </Stack></Box>
     
       <Box sx={{ width: "100%", backgroundColor:"#f5f5f5", "&:hover": { backgroundColor:"#eeeeee"},}}>
-      <Stack direction="row" spacing={1} paddingLeft="10%" paddingTop="4%" paddingBottom="4%" alignItems="center">
+      <Stack direction="row" spacing={1} paddingLeft="10%" marginRight="10%" paddingTop="4%" paddingBottom="4%" alignItems="center">
         <FormControl><FormLabel id="demo-radio-buttons-group-label" sx={{ color:"#000000",}}>-仕事を通じてどのような人たちと関わりたいですか?-</FormLabel>
-          <TextField value={sigotodekakawaritaihito} onChange={handleChange} sx={{ borderColor: '#CCCCCC',  '&:hover fieldset': { borderColor: '#DDDDDD',},"& .MuiInputBase-input": { height: 50 }, width:"200%", }} placeholder="文字を入力" multiline rows={3} /></FormControl>
+          <TextField value={sigotodekakawaritaihito} onChange={sigotodekakawaritaihitoChangeChange} sx={{ borderColor: '#CCCCCC',  '&:hover fieldset': { borderColor: '#DDDDDD',},"& .MuiInputBase-input": { height: 50 }, width:"100%", }} placeholder="文字を入力" multiline rows={3} /></FormControl>
       </Stack></Box>
 
       <Box sx={{ width: "100%", backgroundColor:"#f5f5f5", "&:hover": { backgroundColor:"#eeeeee"},}}>
       <Stack direction="row" spacing={1} paddingLeft="10%" marginRight="10%" paddingTop="4%" paddingBottom="4%" alignItems="center">
-        <FormControl><FormLabel id="demo-radio-buttons-group-label" sx={{ color:"#000000",}}>-働く目的はなんだと思いますか?-</FormLabel>
-          <TextField value={hatarakumokuteki} onChange={handleChange} sx={{ borderColor: '#CCCCCC',  '&:hover fieldset': { borderColor: '#DDDDDD',},"& .MuiInputBase-input": { height: 50 }, width:"200%", }} placeholder="文字を入力" multiline rows={3} /></FormControl>
+        <FormControl><FormLabel id="demo-radio-buttons-group-label" sx={{ color:"#000000",}}>-働く目的はなんだと思いますか?-　　　　　　　　　　　</FormLabel>
+          <TextField value={hatarakumokuteki} onChange={hatarakumokutekiChangeChange} sx={{ borderColor: '#CCCCCC',  '&:hover fieldset': { borderColor: '#DDDDDD',},"& .MuiInputBase-input": { height: 50 }, width:"100%", }} placeholder="文字を入力" multiline rows={3} /></FormControl>
       </Stack></Box>
 
     </Box>
@@ -331,5 +346,3 @@ return (
     {/* // https://isub.co.jp/react/nextjs/nextjs-checkbox-radio-select/　ラジオボタンのつくりかた
     // https://mui.com/material-ui/react-radio-button/  ラジオボタン公式
     // https://qiita.com/YumaInaura/items/5041c8b3778462148b58　onChangeで関数を送るヒント    */}
-
-
