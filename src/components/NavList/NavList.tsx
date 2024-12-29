@@ -20,7 +20,7 @@ const NavList = () => {
     {
       id: 2,
       label: '質問',
-      link: '/components/question/questionMain2',
+      link: '/components/question/questionMain1',
       icon: <BsRocketTakeoff className="size-5" />,
     }
   ];

@@ -1,181 +1,134 @@
-"use client";
-
-import React from "react";
-import scss from "./page.module.scss";
-// import GoBack from "@/lib/components/go-back";
-import { Stack } from "@mui/material";
-import Checkbox from '@mui/material/Checkbox';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
+'use client';
+import React, { useState } from "react";
+import { Stack } from '@mui/material';
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
-import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
-import Favorite from '@mui/icons-material/Favorite';
-import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
-import BookmarkIcon from '@mui/icons-material/Bookmark';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormHelperText from '@mui/material/FormHelperText';
-import Button from '@mui/material/Button';
+import { TextField, Box } from '@mui/material';
+
+export default function Home() {
+    const [selectedValue, setSelectedValue] = React.useState('a');
+    const [heatHandleChange, setHeatHandleChange] = useState("");
+    const [aiuoHandleChange, setAiuoHandleChange] = useState("");
+    const [onigiriChange, setOnigiriChange] = useState("");
+    const [text, setText] = useState("");
+    const [yume, seYume] = useState("");
 
 
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      const selectedValue = event.target.value;
+      setSelectedValue(selectedValue); 
+      console.log(selectedValue); 
+    };
+  
 
-const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
-
-    export default function questionMain1() {
-
-    const [value, setValue] = React.useState('');
-    const [error, setError] = React.useState(false);
-    const [helperText, setHelperText] = React.useState('Choose wisely');
-
-    const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setValue((event.target as HTMLInputElement).value);
-        setHelperText(' ');
-        setError(false);
+    const onigiri = (event: React.ChangeEvent<HTMLInputElement>) => {
+      const onigiriChange = event.target.value;
+      setOnigiriChange(onigiriChange); 
+      console.log(onigiriChange); 
     };
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
 
-        if (value === 'best') {
-            setHelperText('You got it!');
-            setError(false);
-        } else if (value === 'worst') {
-            setHelperText('Sorry, wrong answer!');
-            setError(true);
-        } else {
-            setHelperText('Please select an option.');
-            setError(true);
-        }
-    };
-    
-    return (
-        <div className={scss.component}>
-            {/* <GoBack /> */}
-            <br />
-            <br />
+  return (
+<Box sx={{ backgroundColor:"#",}}>
+  <Box sx={{ width: "100%", backgroundColor:"#f5f5f5", "&:hover": { backgroundColor:"#eeeeee"},}}>
+    <Stack direction="row" spacing={1} paddingLeft="10%" paddingTop="4%" paddingBottom="4%" alignItems="center">
+     <FormControl>
+      <FormLabel id="demo-radio-buttons-group-label" sx={{ color:"#000000",}}>わーい</FormLabel>
+        <RadioGroup aria-labelledby="demo-radio-buttons-group-label" defaultValue="female" name="radio-buttons-group" onChange={onigiri}>
+          <FormControlLabel value="しゃけ" control={
+            <Radio sx={{color: "#404040",'&.Mui-checked': { color: "#404040",},'& .MuiSvgIcon-root': { fontSize: 50,},}}/>} label="しゃけ" />
+         <FormControlLabel value="たまご" control={
+            <Radio sx={{color: "#404040",'&.Mui-checked': { color: "#404040",},'& .MuiSvgIcon-root': { fontSize: 50,},}}/>} label="たまご" />
+         <FormControlLabel value="おかか" control={
+            <Radio sx={{color: "#404040",'&.Mui-checked': { color: "#404040",},'& .MuiSvgIcon-root': { fontSize: 50,},}}/>} label="おかか" />
+        </RadioGroup>
+      </FormControl>
+    </Stack>
+  </Box>
+  
+  <Box sx={{ width:"100%", backgroundColor:"#f5f5f5", "&:hover": { backgroundColor:"#eeeeee"},}}>
+    <Stack direction="row" spacing={1} paddingLeft="10%" paddingTop="4%" paddingBottom="4%" alignItems="center">
+     <FormControl>
+      <FormLabel id="demo-radio-buttons-group-label" sx={{ color:"#000000",}}>アイスクリーム</FormLabel>
+      <TextField sx={{ borderColor: '#CCCCCC',  '&:hover fieldset': { borderColor: '#DDDDDD',},"& .MuiInputBase-input": { height: 50 }, width: "150%", }} placeholder="文字を入力" multiline rows={3} /></FormControl>
+    </Stack>
+  </Box>
 
-            <Stack spacing={1} sx={{ width: "30%" }}>
-                <Stack
-                direction="row"
-                spacing={1}
-                justifyContent="center"
-                alignItems="center"
-                >
-                    <Checkbox {...label} defaultChecked />
-                    <Checkbox {...label} />
-                    <Checkbox {...label} disabled />
-                    <Checkbox {...label} disabled checked />
+  <Box sx={{ width: "100%", backgroundColor:"#f5f5f5", "&:hover": { backgroundColor:"#eeeeee"},}}>
+    <Stack direction="row" spacing={1} paddingLeft="10%" paddingTop="4%" paddingBottom="4%" alignItems="center">
+     <FormControl>
+      <FormLabel id="demo-radio-buttons-group-label" sx={{ color:"#000000",}}>夢は何ですか?</FormLabel>
+      <TextField value={yume} sx={{ borderColor: '#CCCCCC',  '&:hover fieldset': { borderColor: '#DDDDDD',},"& .MuiInputBase-input": { height: 50 }, width:"150%", }} placeholder="文字を入力" multiline rows={3} /></FormControl>
+    </Stack>
+  </Box>
 
-                    <Checkbox {...label} icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
-                    <Checkbox
-                    {...label}
-                    icon={<BookmarkBorderIcon />}
-                    checkedIcon={<BookmarkIcon />}
-                    />
-                </Stack>
-                <Stack
-                direction="row"
-                spacing={1}
-                justifyContent="center"
-                alignItems="center"
-                >
-                    <FormGroup>
-                        <FormControlLabel control={<Checkbox defaultChecked />} label="Label" />
-                        <FormControlLabel required control={<Checkbox />} label="Required" />
-                        <FormControlLabel disabled control={<Checkbox />} label="Disabled" />
-                    </FormGroup>
-                </Stack>
-                <Stack
-                direction="row"
-                spacing={1}
-                justifyContent="center"
-                alignItems="center"
-                >
-                    <FormControl component="fieldset">
-                    <FormLabel component="legend">Label placement</FormLabel>
-                    <FormGroup aria-label="position" row>
-                        <FormControlLabel
-                        value="top"
-                        control={<Checkbox />}
-                        label="Top"
-                        labelPlacement="top"
-                        />
-                        <FormControlLabel
-                        value="start"
-                        control={<Checkbox />}
-                        label="Start"
-                        labelPlacement="start"
-                        />
-                        <FormControlLabel
-                        value="bottom"
-                        control={<Checkbox />}
-                        label="Bottom"
-                        labelPlacement="bottom"
-                        />
-                        <FormControlLabel
-                        value="end"
-                        control={<Checkbox />}
-                        label="End"
-                        labelPlacement="end"
-                        />
-                    </FormGroup>
-                    </FormControl>
-                </Stack>
+  <Box sx={{ width: "100%", backgroundColor:"#f5f5f5", "&:hover": { backgroundColor:"#eeeeee"},}}>
+    <Stack direction="row" spacing={1} paddingLeft="10%" paddingTop="4%" paddingBottom="4%" alignItems="center">
+     <FormControl>
+      <FormLabel id="demo-radio-buttons-group-label" sx={{ color:"#000000",}}>得意なことは何ですか?</FormLabel>
+      <TextField value={yume} sx={{ borderColor: '#CCCCCC',  '&:hover fieldset': { borderColor: '#DDDDDD',},"& .MuiInputBase-input": { height: 50 }, width:"150%", }} placeholder="文字を入力" multiline rows={3} /></FormControl>
+    </Stack>
+  </Box>
 
-                <Stack
-                direction="row"
-                spacing={1}
-                justifyContent="center"
-                alignItems="center"
-                >
-                    <FormControl>
-                        <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
-                        <RadioGroup
-                            aria-labelledby="demo-radio-buttons-group-label"
-                            defaultValue="female"
-                            name="radio-buttons-group"
-                        >
-                            <FormControlLabel value="female" control={<Radio />} label="Female" />
-                            <FormControlLabel value="male" control={<Radio />} label="Male" />
-                            <FormControlLabel value="other" control={<Radio />} label="Other" />
-                        </RadioGroup>
-                    </FormControl>
-                </Stack>
-                <Stack
-                direction="row"
-                spacing={1}
-                justifyContent="center"
-                alignItems="center"
-                >
-                    <form onSubmit={handleSubmit}>
-                    <FormControl sx={{ m: 3 }} error={error} variant="standard">
-                        <FormLabel id="demo-error-radios">Pop quiz: MUI is...</FormLabel>
-                        <RadioGroup
-                        aria-labelledby="demo-error-radios"
-                        name="quiz"
-                        value={value}
-                        onChange={handleRadioChange}
-                        >
-                        <FormControlLabel value="best" control={<Radio />} label="The best!" />
-                        <FormControlLabel value="worst" control={<Radio />} label="The worst." />
-                        </RadioGroup>
-                        <FormHelperText>{helperText}</FormHelperText>
-                        <Button sx={{ mt: 1, mr: 1 }} type="submit" variant="outlined">
-                        Check Answer
-                        </Button>
-                    </FormControl>
-                    </form>
-                </Stack>
+  <Box sx={{ width: "100%", p: 2, backgroundColor:"#f5f5f5", "&:hover": { backgroundColor:"#eeeeee"},}}>
+    <Stack direction="row" spacing={1} paddingLeft="10%" paddingTop="4%" paddingBottom="4%" alignItems="center">
+    <FormControl>
+    <FormLabel id="demo-radio-buttons-group-label" sx={{ color:"#000000",}}>理系？文系？</FormLabel>
+      <RadioGroup aria-labelledby="demo-form-control-label-placement" name="position" defaultValue="top">
+        <FormControlLabel value="bottom" control={
+          <Radio value="humanitiesScience1"
+            sx={{color: "#404040",fontSize:"0.5%", '&.Mui-checked': { color: "#404040",},'& .MuiSvgIcon-root': { fontSize: 40,},}}/>} label="　　　　理系　　　　" labelPlacement="top"/>
+        <FormControlLabel value="bottom" control={
+        <Radio value="humanitiesScience2"
+            sx={{color: "#4a4a4a",'&.Mui-checked': { color: "#4a4a4a",},'& .MuiSvgIcon-root': { fontSize: 50,},}}/>} label="どちらかというと理系" labelPlacement="top"/>
+        <FormControlLabel value="bottom" control={
+        <Radio value="humanitiesScience3"
+            sx={{color: "#505050",'&.Mui-checked': { color: "#505050",},'& .MuiSvgIcon-root': { fontSize: 50,},}}/>} label="　　どちらでもない　" labelPlacement="top"/>
+        <FormControlLabel value="bottom" control={
+        <Radio value="humanitiesScience4"
+            sx={{color: "#4a4a4a",'&.Mui-checked': { color: "#4a4a4a",},'& .MuiSvgIcon-root': { fontSize: 50,},}}/>} label="どちらかというと文系" labelPlacement="top"/>
+        <FormControlLabel value="end" control={
+        <Radio value="humanitiesScience5"
+            sx={{color: "#404040",'&.Mui-checked': { color: "#404040",},'& .MuiSvgIcon-root': { fontSize: 50,},}}/>} label="　　　　文系　　　　" labelPlacement="top"/>
+      </RadioGroup>
+    </FormControl>
+    </Stack>
+    </Box>
 
-                <Stack
-                direction="row"
-                spacing={1}
-                justifyContent="center"
-                alignItems="center"
-                >
-                </Stack>
-            </Stack>
-        </div>
-    );
-};
+    <Box sx={{ width: "100%", backgroundColor:"#f5f5f5", "&:hover": { backgroundColor:"#eeeeee"},}}>
+    <Stack direction="row" spacing={1} paddingLeft="10%" paddingTop="4%" paddingBottom="4%" alignItems="center">
+     <FormControl>
+    <FormLabel id="demo-radio-buttons-group-label" sx={{ color:"#000000",}}>目標の偏差値は？</FormLabel>
+      <RadioGroup aria-labelledby="demo-form-control-label-placement" name="position" defaultValue="top">
+        <FormControlLabel value="bottom" control={
+          <Radio value="humanitiesScience1"
+            sx={{color: "#404040",fontSize:"0.5%", '&.Mui-checked': { color: "#404040",},'& .MuiSvgIcon-root': { fontSize: 40,},}}/>} label="理系" />
+        <FormControlLabel value="bottom" control={
+        <Radio value="humanitiesScience2"
+            sx={{color: "#4a4a4a",'&.Mui-checked': { color: "#4a4a4a",},'& .MuiSvgIcon-root': { fontSize: 50,},}}/>} label="どちらかというと理系" />
+        <FormControlLabel value="bottom" control={
+        <Radio value="humanitiesScience3"
+            sx={{color: "#505050",'&.Mui-checked': { color: "#505050",},'& .MuiSvgIcon-root': { fontSize: 50,},}}/>} label="どちらでもない" />
+        <FormControlLabel value="bottom" control={
+        <Radio value="humanitiesScience4"
+            sx={{color: "#4a4a4a",'&.Mui-checked': { color: "#4a4a4a",},'& .MuiSvgIcon-root': { fontSize: 50,},}}/>} label="どちらかというと文系" />
+        <FormControlLabel value="end" control={
+            <Radio sx={{color: "#404040",'&.Mui-checked': { color: "#404040",},'& .MuiSvgIcon-root': { fontSize: 50,},}}/>} label="文系" />
+        <FormControlLabel value="おかか" control={
+            <Radio sx={{color: "#404040",'&.Mui-checked': { color: "#404040",},'& .MuiSvgIcon-root': { fontSize: 50,},}}/>} label="おかか" />
+      </RadioGroup>
+    </FormControl>
+    </Stack>
+    </Box>
+
+
+    </Box>
+);};
+
+
+    {/* // https://isub.co.jp/react/nextjs/nextjs-checkbox-radio-select/　ラジオボタンのつくりかた
+    // https://mui.com/material-ui/react-radio-button/  ラジオボタン公式
+    // https://qiita.com/YumaInaura/items/5041c8b3778462148b58　onChangeで関数を送るヒント    */}
