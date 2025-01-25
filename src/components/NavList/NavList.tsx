@@ -22,8 +22,14 @@ const NavList = () => {
       label: '質問',
       link: '/components/question/questionMain1',
       icon: <BsRocketTakeoff className="size-5" />,
-    }
-  ];
+    },
+    {
+      id: 3,
+      label: 'ログイン',
+      link: '/login', // ここでログインページのルートを指定
+      icon: <BsRocketTakeoff className="size-5" />,
+    },
+];
   return (
     <div className="mt-12">
       {navList.map((navItem) => {
