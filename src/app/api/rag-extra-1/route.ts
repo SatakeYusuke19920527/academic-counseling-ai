@@ -10,7 +10,8 @@ import {
 import { NextRequest } from 'next/dist/server/web/spec-extension/request';
 import { NextResponse } from 'next/dist/server/web/spec-extension/response';
 
-export const POST = async (req: NextRequest) => {
+
+export const POST = async (req: NextRequest, ) => {
   try {
     const { message } = await req.json();
 
@@ -27,7 +28,7 @@ export const POST = async (req: NextRequest) => {
     // systemMessageにRAGの情報を追加
     console.log('🚀Create system message and image_content.');
     let systemMessage =
-      'あなたは優秀な進路相談師です。# 検索結果より下の事は使わないでください';
+      'あなたは優秀な進路相談師です。入ってきたデータを参考にして進路先を提示してください。進学するべき大学は具体名を用いて提示してください。"# 検索結果"より下の事は使わないでください';
      systemMessage += '# 検索結果\n';
     let images = [];
     for (const result of cosmosItems) {
