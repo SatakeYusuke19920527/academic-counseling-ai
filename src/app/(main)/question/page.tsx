@@ -1,5 +1,6 @@
 //JSONがわかんない
 'use client';
+import "./question.css";
 import Link from 'next/link';
 import React, { useState } from "react";
 import { Stack } from '@mui/material';
@@ -11,7 +12,6 @@ import FormLabel from '@mui/material/FormLabel';
 import { TextField, Box, Button } from '@mui/material';
 import Checkbox from '@mui/material/Checkbox';
 import FormGroup from '@mui/material/FormGroup';
-
 
 export default function Home() {
     const [newTokuinakoto, setNewTokuinakoto] = useState("");
@@ -33,7 +33,6 @@ export default function Home() {
     const [hatarakumokuteki, setHatarakumokuteki] = useState("")
     const [newHatarakumokuteki, setNewHatarakumokuteki] = useState("")
     const [answerChange, setAnswerChange] = useState(""); // まとめた回答を保存
-    const [displayValues, setDisplayValues] = useState<string[]>([]); // 各項目を保存
 
     const basyo = (event: React.ChangeEvent<HTMLInputElement>) => {
         const basyoChangeChange = event.target.value; // 現在の入力値を取得
@@ -435,12 +434,16 @@ return (
 
       <Box sx={{ width: "100%", backgroundColor:"#f5f5f5", "&:hover": { backgroundColor:"#eeeeee"},}}>
       <Stack direction="row" spacing={1} paddingLeft="10%" marginRight="10%" paddingTop="4%" paddingBottom="4%" alignItems="center">
-        {/* {answerChange} */}
         <div>
           <button onClick={answer}>JSONを生成</button>
           <h2>JSON 出力</h2>
           <pre>{answerChange || "まだデータがありません"}</pre>
         </div>
+      </Stack></Box>
+
+      <Box sx={{ width: "100%", backgroundColor:"#f5f5f5", "&:hover": { backgroundColor:"#eeeeee"},}}>
+      <Stack direction="row" spacing={1} paddingLeft="10%" marginRight="10%" paddingTop="4%" paddingBottom="4%" alignItems="center">
+      
       </Stack></Box>
     </Box>
 );};
