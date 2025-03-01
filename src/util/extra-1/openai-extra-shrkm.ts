@@ -71,12 +71,15 @@ export const getEmbedding = async (message: string): Promise<number[]> => {
     const azureApiKey = process.env.AZURE_OPENAI_API_KEY!;
     const deploymentId = process.env.AZURE_OPENAI_VEC_DEPLOYMENT_ID!;
     // clientはメソッドの外に出したほうがいい？
+    console.log("first embedding")
     const client = new OpenAIClient(
       endpoint,
       new AzureKeyCredential(azureApiKey)
     );
+    console.log("second embedding")
     const embedding = await client.getEmbeddings(deploymentId, [message]); // Pass message as an array
     // 返却
+    console.log("second embedding")
     resolve(embedding.data[0].embedding);
   });
 };

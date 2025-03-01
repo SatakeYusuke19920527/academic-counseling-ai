@@ -40,3 +40,12 @@
   h1 {
 	color: blue;
   }
+.answer_box {
+	margin-top: 10px;
+	margin-bottom: 10px;
+    height: fit-content;
+    width: 100%;
+    border-width: 5px;
+    border-color: rgb(83, 151, 239);
+    border-style: ridge;
+  }

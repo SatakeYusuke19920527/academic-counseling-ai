@@ -12,9 +12,10 @@ import FormLabel from '@mui/material/FormLabel';
 import { TextField, Box, Button } from '@mui/material';
 import Checkbox from '@mui/material/Checkbox';
 import FormGroup from '@mui/material/FormGroup';
+import { useCallback } from "react";
 
 export default function Home() {
-    const [newTokuinakoto, setNewTokuinakoto] = useState("");
+  // const [newTokuinakoto, setNewTokuinakoto] = useState("");
     const [tokuinakoto, setTokuinakoto] = useState<string>("");
     const [basyoChange, setBasyoChange] = useState("");
     const [newBasyoChange, setNewBasyoChange] = useState("");
@@ -27,12 +28,15 @@ export default function Home() {
     const [tokuinakamokuChange, setTokuinakamokuChange] = useState("");
     const [nigatenakamokuChange, setNigatenakamokuChange] = useState("");
     const [donoyounasigoto, setDonoyounasigoto] = useState("")
-    const [newDonoyounasigoto, setNewDonoyounasigoto] = useState("")
+    // const [newSigotodekakawaritaihito, setNewSigotodekakawaritaihito] = useState("")
     const [sigotodekakawaritaihito, setSigotodekakawaritaihito] = useState("")
-    const [newSigotodekakawaritaihito, setNewSigotodekakawaritaihito] = useState("")
+    // const [newDonoyounasigoto, setNewDonoyounasigoto] = useState("")
     const [hatarakumokuteki, setHatarakumokuteki] = useState("")
-    const [newHatarakumokuteki, setNewHatarakumokuteki] = useState("")
+    // const [newHatarakumokuteki, setNewHatarakumokuteki] = useState("")
     const [answerChange, setAnswerChange] = useState(""); // まとめた回答を保存
+    // const [displayValues, setDisplayValues] = useState<string[]>([]); // 各項目を保存
+    const [ message, setMessage ] = useState<string>("")
+    const [ context, setContent ] = useState<string>('AIの返答')
 
     const basyo = (event: React.ChangeEvent<HTMLInputElement>) => {
         const basyoChangeChange = event.target.value; // 現在の入力値を取得
@@ -140,7 +144,27 @@ export default function Home() {
         // JSON を文字列化して保存（インデントを付けて見やすくする）
         const jsonString = JSON.stringify(jsonData, null, 2);
         setAnswerChange(jsonString);
-      };
+        setMessage(jsonString)
+      };//AIに送る部分
+    const sendMessage = async () => {
+        // Send message to the OpenAI
+      const url = '/api/rag-extra-1';
+      console.log('🚀 ~ sendMessage ~ url:', url,process.env.NEXT_PUBLIC_URL);
+      const response = await fetch(`${process.env.NEXT_PUBLIC_URL}${url}`, {
+        method: 'POST',          
+        headers: {'Content-Type': 'application/json',},
+        body: JSON.stringify({ message }),
+      });
+      const  aiMessage  = await response.json();
+      const data = typeof aiMessage.aiMessage === 'string' 
+          ? aiMessage.aiMessage 
+          : JSON.stringify(aiMessage.aiMessage);
+      setContent(data);
+    };  
+    const handleClick = useCallback(() => {
+      answer();
+      sendMessage(); 
+    }, []);
 
 return (
   <Box sx={{ backgroundColor:"#",}}>
@@ -429,23 +453,17 @@ return (
 
       <Box sx={{ width: "100%", backgroundColor:"#f5f5f5", "&:hover": { backgroundColor:"#eeeeee"},}}>
       <Stack direction="row" spacing={1} paddingLeft="10%" marginRight="10%" paddingTop="4%" paddingBottom="4%" alignItems="center">
-        {basyoChange}{rikeibunkeiChange}{hensachiChange}{newTokuinakoto}{juunenngoChange}{donnahatarakikataChange}{syuunyuutoyarigaiChange}{sukinakamokuChange}{tokuinakamokuChange}{nigatenakamokuChange}{newDonoyounasigoto}{newSigotodekakawaritaihito}{newHatarakumokuteki}
-      </Stack></Box>
-
-      <Box sx={{ width: "100%", backgroundColor:"#f5f5f5", "&:hover": { backgroundColor:"#eeeeee"},}}>
-      <Stack direction="row" spacing={1} paddingLeft="10%" marginRight="10%" paddingTop="4%" paddingBottom="4%" alignItems="center">
+        {answerChange}
         <div>
-          <button onClick={answer}>JSONを生成</button>
-          <h2>JSON 出力</h2>
-          <pre>{answerChange || "まだデータがありません"}</pre>
+        <button onClick={answer}>JSONを生成</button>
+        <button onClick={sendMessage}>AIに考えてもらう</button>
+        {/* <button onClick={handleClick}>JSONを生成 & AIに考えてもらう</button> */}
+        <div className='answer_box'>
+          <p>{context}</p>
+          </div>
         </div>
-      </Stack></Box>
-
-      <Box sx={{ width: "100%", backgroundColor:"#f5f5f5", "&:hover": { backgroundColor:"#eeeeee"},}}>
-      <Stack direction="row" spacing={1} paddingLeft="10%" marginRight="10%" paddingTop="4%" paddingBottom="4%" alignItems="center">
-      
-      </Stack></Box>
-    </Box>
+        </Stack></Box>
+  </Box>
 );};
 
 
