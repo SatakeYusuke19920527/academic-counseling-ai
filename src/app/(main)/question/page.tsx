@@ -152,7 +152,7 @@ export default function Home() {
 
         // Send message to the OpenAI
         const url = '/api/rag-extra-1';
-        console.log('🚀 ~ sendMessage ~ url:', url,process.env.NEXT_PUBLIC_URL);
+        console.log('🚀 ~ sendMessage ~ url:', url,);
         const response = await fetch(`${url}`, {
           method: 'POST',
           headers: {

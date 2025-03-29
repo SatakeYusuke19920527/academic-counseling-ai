@@ -8,6 +8,7 @@
 //   getEmbedding,
 // } from '@/util/extra-1/openai-extra-shrkm';
 // import { NextRequest } from 'next/dist/server/web/spec-extension/request';
+import { NextRequest } from 'next/server';
 import { NextResponse } from 'next/dist/server/web/spec-extension/response';
 
 
@@ -57,7 +58,34 @@ import { NextResponse } from 'next/dist/server/web/spec-extension/response';
 //   }
 // };
 // export const dynamic = 'force-dynamic';
-export async function POST() {
-  return NextResponse.json({ ai: "応答メッセージ" }, { status: 200 });
+export async function POST(req: NextRequest) {
+  try {
+    // リクエストボディの解析を try-catch で囲む
+    let message;
+    try {
+      const body = await req.json();
+      message = body.message;
+    } catch (parseError) {
+      return NextResponse.json({
+        error: '無効なリクエスト形式です'
+      }, { status: 400 });
+    }
+
+    // 必ずJSONレスポンスを返す
+    return NextResponse.json({
+      aiMessage: `受信したメッセージ: ${message}`,
+      timestamp: new Date().toISOString()
+    });
+
+  } catch (error) {
+    // エラーも必ずJSON形式で返す
+    console.error('APIエラー:', error);
+    return NextResponse.json({
+      error: 'サーバーエラーが発生しました',
+      details: error instanceof Error ? error.message : '不明なエラー'
+    }, { status: 500 });
+  }
 }
+
+export const dynamic = 'force-dynamic';
 
