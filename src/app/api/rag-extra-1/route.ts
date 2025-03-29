@@ -8,7 +8,7 @@
 //   getEmbedding,
 // } from '@/util/extra-1/openai-extra-shrkm';
 // import { NextRequest } from 'next/dist/server/web/spec-extension/request';
-// import { NextResponse } from 'next/dist/server/web/spec-extension/response';
+import { NextResponse } from 'next/dist/server/web/spec-extension/response';
 
 
 // export const POST = async (req: NextRequest, ) => {
@@ -56,5 +56,8 @@
 //     return NextResponse.json({ aiMessage: error.message }, { status: 500 });
 //   }
 // };
-
 // export const dynamic = 'force-dynamic';
+export async function POST() {
+  return NextResponse.json({ ai: "応答メッセージ" }, { status: 200 });
+}
+
