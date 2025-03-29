@@ -102,23 +102,17 @@ export default function Home() {
     };
     const donoyounasigotoChangeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       const newDonoyounasigoto = event.target.value; // 現在の入力値を取得
-      // const donoyounasigoto = event.target.value; // 現在の入力値を取得
       setDonoyounasigoto(newDonoyounasigoto); 
-      // setNewDonoyounasigoto(donoyounasigoto);
       console.log("どのような仕事がしたいか:" + newDonoyounasigoto);
     };
     const sigotodekakawaritaihitoChangeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       const newSigotodekakawaritaihito = event.target.value; // 現在の入力値を取得
-      // const sigotodekakawaritaihito = event.target.value; // 現在の入力値を取得
       setSigotodekakawaritaihito(newSigotodekakawaritaihito); 
-      // setNewSigotodekakawaritaihito(sigotodekakawaritaihito);
       console.log("仕事で関わりたい人は:" + newSigotodekakawaritaihito);
     };
     const hatarakumokutekiChangeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       const newHatarakumokuteki = event.target.value; // 現在の入力値を取得
-      // const hatarakumokuteki = event.target.value; // 現在の入力値を取得
       setHatarakumokuteki(newHatarakumokuteki); 
-      // setNewHatarakumokuteki(hatarakumokuteki);
       console.log("働く目的は:" + newHatarakumokuteki);
     };
     const answer = () => {
@@ -142,25 +136,12 @@ export default function Home() {
         const jsonString = JSON.stringify(jsonData, null, 2);
         setAnswerChange(jsonString);
         setMessage(jsonString)
-      };//AIに送る部分
-    // const sendMessage = async () => {
-    //   const url = '/api/rag-extra-1';
-    //   console.log('🚀 ~ sendMessage ~ url:', url,process.env.NEXT_PUBLIC_URL);
-    //   const response = await fetch(`${process.env.NEXT_PUBLIC_URL}${url}`, {
-    //     method: 'POST',          
-    //     headers: {'Content-Type': 'application/json',},
-    //     body: JSON.stringify({ message }),
-    //   });
-    //   const  aiMessage  = await response.json();
-    //   const data = typeof aiMessage.aiMessage === 'string' 
-    //       ? aiMessage.aiMessage 
-    //       : JSON.stringify(aiMessage.aiMessage);
-    //   setContent(data);
-    // };  
+      };
+
     const handleSubmit = async (e: SyntheticEvent) => {
       e.preventDefault()
       setLoading(true)  // ローディング開始
-    
+
       const url = '/api/rag-extra-1';
       console.log('🚀 ~ sendMessage ~ url:', url,process.env.NEXT_PUBLIC_URL);
       const response = await fetch(`${process.env.NEXT_PUBLIC_URL}${url}`, {
@@ -181,9 +162,6 @@ export default function Home() {
         },
         body: JSON.stringify({ prompt: prompt }),
       })
-    
-      // const data = await res.json()
-    
       if (res.status === 200) {
         console.log(data)
         const logData = {
@@ -195,7 +173,6 @@ export default function Home() {
       }
       setLoading(false)  // ローディング終了
     }
-
 
 return (
   <Box sx={{ backgroundColor:"#",}}>
