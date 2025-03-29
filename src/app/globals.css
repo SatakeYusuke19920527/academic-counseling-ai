@@ -30,7 +30,17 @@
 	height: 20px;
   }
 
-  .answer_box {
+
+  body {
+	margin: 0;
+	padding: 0;
+	font-family: Arial, sans-serif;
+  }
+  
+  h1 {
+	color: blue;
+  }
+.answer_box {
 	margin-top: 10px;
 	margin-bottom: 10px;
     height: fit-content;
