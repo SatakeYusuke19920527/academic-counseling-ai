@@ -2,7 +2,7 @@
 'use client';
 import "./question.css";
 import Link from 'next/link';
-import React, { useState } from "react";
+import React, { useState, Suspense, SyntheticEvent} from "react";
 import { Stack } from '@mui/material';
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Radio from "@mui/material/Radio";
@@ -12,10 +12,9 @@ import FormLabel from '@mui/material/FormLabel';
 import { TextField, Box, Button } from '@mui/material';
 import Checkbox from '@mui/material/Checkbox';
 import FormGroup from '@mui/material/FormGroup';
-import { useCallback } from "react";
+import Loading from "@/app/(main)/loading";
 
 export default function Home() {
-  // const [newTokuinakoto, setNewTokuinakoto] = useState("");
     const [tokuinakoto, setTokuinakoto] = useState<string>("");
     const [basyoChange, setBasyoChange] = useState("");
     const [newBasyoChange, setNewBasyoChange] = useState("");
@@ -28,15 +27,13 @@ export default function Home() {
     const [tokuinakamokuChange, setTokuinakamokuChange] = useState("");
     const [nigatenakamokuChange, setNigatenakamokuChange] = useState("");
     const [donoyounasigoto, setDonoyounasigoto] = useState("")
-    // const [newSigotodekakawaritaihito, setNewSigotodekakawaritaihito] = useState("")
     const [sigotodekakawaritaihito, setSigotodekakawaritaihito] = useState("")
-    // const [newDonoyounasigoto, setNewDonoyounasigoto] = useState("")
     const [hatarakumokuteki, setHatarakumokuteki] = useState("")
-    // const [newHatarakumokuteki, setNewHatarakumokuteki] = useState("")
     const [answerChange, setAnswerChange] = useState(""); // まとめた回答を保存
-    // const [displayValues, setDisplayValues] = useState<string[]>([]); // 各項目を保存
     const [ message, setMessage ] = useState<string>("")
-    const [ context, setContent ] = useState<string>('AIの返答')
+    const [ content, setContent ] = useState<string>('AIの返答')
+    const [loading, setLoading] = useState(false)
+
 
     const basyo = (event: React.ChangeEvent<HTMLInputElement>) => {
         const basyoChangeChange = event.target.value; // 現在の入力値を取得
@@ -146,8 +143,24 @@ export default function Home() {
         setAnswerChange(jsonString);
         setMessage(jsonString)
       };//AIに送る部分
-    const sendMessage = async () => {
-        // Send message to the OpenAI
+    // const sendMessage = async () => {
+    //   const url = '/api/rag-extra-1';
+    //   console.log('🚀 ~ sendMessage ~ url:', url,process.env.NEXT_PUBLIC_URL);
+    //   const response = await fetch(`${process.env.NEXT_PUBLIC_URL}${url}`, {
+    //     method: 'POST',          
+    //     headers: {'Content-Type': 'application/json',},
+    //     body: JSON.stringify({ message }),
+    //   });
+    //   const  aiMessage  = await response.json();
+    //   const data = typeof aiMessage.aiMessage === 'string' 
+    //       ? aiMessage.aiMessage 
+    //       : JSON.stringify(aiMessage.aiMessage);
+    //   setContent(data);
+    // };  
+    const handleSubmit = async (e: SyntheticEvent) => {
+      e.preventDefault()
+      setLoading(true)  // ローディング開始
+    
       const url = '/api/rag-extra-1';
       console.log('🚀 ~ sendMessage ~ url:', url,process.env.NEXT_PUBLIC_URL);
       const response = await fetch(`${process.env.NEXT_PUBLIC_URL}${url}`, {
@@ -160,15 +173,33 @@ export default function Home() {
           ? aiMessage.aiMessage 
           : JSON.stringify(aiMessage.aiMessage);
       setContent(data);
-    };  
-    const handleClick = useCallback(() => {
-      answer();
-      sendMessage(); 
-    }, []);
+
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ prompt: prompt }),
+      })
+    
+      // const data = await res.json()
+    
+      if (res.status === 200) {
+        console.log(data)
+        const logData = {
+          prompt: prompt,
+          ...data.message,
+        }
+      } else {
+        console.log(data)
+      }
+      setLoading(false)  // ローディング終了
+    }
+
 
 return (
   <Box sx={{ backgroundColor:"#",}}>
-  <Link href="/" className="mt-4 text-xl text-blue-600 hover: underline">ホーム画面</Link>
+  <Link href="/" className="rounded-md mt-4 text-xl text-orange-600 hover: underline">ホーム画面</Link>
   <Box sx={{ width: "100%", backgroundColor:"#f5f5f5", "&:hover": { backgroundColor:"#eeeeee"},}}>
     <Stack direction="row" spacing={1} paddingLeft="10%" paddingRight="10%" paddingTop="4%" paddingBottom="4%" alignItems="center">
     <FormControl>
@@ -451,18 +482,37 @@ return (
            sx={{ borderColor: '#CCCCCC',  '&:hover fieldset': { borderColor: '#DDDDDD',},"& .MuiInputBase-input": { height: 50 }, width:"100%", }} placeholder="文字を入力" multiline rows={3} /></FormControl>
       </Stack></Box>
 
-      <Box sx={{ width: "100%", backgroundColor:"#f5f5f5", "&:hover": { backgroundColor:"#eeeeee"},}}>
-      <Stack direction="row" spacing={1} paddingLeft="10%" marginRight="10%" paddingTop="4%" paddingBottom="4%" alignItems="center">
-        {answerChange}
-        <div>
-        <button onClick={answer}>JSONを生成</button>
-        <button onClick={sendMessage}>AIに考えてもらう</button>
-        {/* <button onClick={handleClick}>JSONを生成 & AIに考えてもらう</button> */}
-        <div className='answer_box'>
-          <p>{context}</p>
-          </div>
+      <div className="flex justify-center">
+        <button className={`flex-none rounded-md bg-orange-600 mt-10 px-6 py-4 text-md font-semibold text-white shadow-sm`
+          }onClick={answer}>これで決定する</button>
         </div>
-        </Stack></Box>
+
+        <div className="flex justify-center container mx-auto py-[10px]">
+        <button
+          disabled={loading || !prompt}
+          type="submit"
+          className={
+            loading || !prompt
+              ? `flex-none rounded-md bg-orange-300 mt-5 px-6 py-4 text-md font-semibold text-white shadow-sm`
+              : `flex-none rounded-md bg-orange-600 mt-5 px-6 py-4 text-md font-semibold text-white shadow-sm hover:bg-orange-600 focus-visible:bg-orange-600`
+          } onClick={handleSubmit}
+        >
+          {loading ? (
+            <div className="flex justify-center items-center">
+              <div className="mr-8 animate-spin inline-block w-8 h-8 border-[6px] border-current border-t-transparent text-white rounded-full"></div>
+              {`Loading...`}
+            </div>
+          ) : (
+            `答えてもらう`
+          )}
+        </button>
+        </div>
+
+        <div className='flex-none rounded-md bg-orange-100 mx-2 my-6 px-6 py-6 font-semibold text-black'>
+          <p>{content}</p>
+          </div>
+
+        <Link href="/question" className="rounded-md mt-4 text-xl text-orange-600 hover: underline">質問</Link>
   </Box>
 );};
 
