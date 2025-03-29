@@ -8,5 +8,6 @@ return (
   <Box>
   <Link href="/question" className="mt-4 text-xl text-blue-600 hover: underline">質問</Link>
   <Link href="/result">go to result Page</Link>
+  <Link href="/login">ログイン</Link>
     </Box>
 );};
